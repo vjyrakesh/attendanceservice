@@ -1,5 +1,6 @@
 package com.rkasibhatla.attendanceservice.controller;
 
+import com.rkasibhatla.attendanceservice.dto.SubjectDto;
 import com.rkasibhatla.attendanceservice.entity.Subject;
 import com.rkasibhatla.attendanceservice.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class SubjectController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addSubject(@RequestBody Subject subject) {
+    public ResponseEntity<?> addSubject(@RequestBody SubjectDto subject) {
         return new ResponseEntity<>(subjectService.addSubject(subject), HttpStatus.CREATED);
     }
 }
