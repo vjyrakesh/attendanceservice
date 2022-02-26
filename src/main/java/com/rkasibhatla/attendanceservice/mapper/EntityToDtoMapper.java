@@ -39,7 +39,8 @@ public class EntityToDtoMapper {
             studentDto.setUsername(student.getUsername());
             studentDto.setFirstName(student.getFirstName());
             studentDto.setLastName(student.getLastName());
-            studentDto.setStandard(student.getStandard().getName());
+            if(student.getStandard() != null)
+                studentDto.setStandard(student.getStandard().getName());
             studentDto.setPersonType(PersonType.STUDENT);
         }
         return studentDto;

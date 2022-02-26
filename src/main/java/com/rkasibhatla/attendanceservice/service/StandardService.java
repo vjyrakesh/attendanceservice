@@ -53,4 +53,8 @@ public class StandardService {
         standards.forEach(standard -> standardDtos.add(entityToDtoMapper.getStandardDtoForStandard(standard)));
         return standardDtos;
     }
+
+    public Standard getStandardById(Integer id) {
+        return standardRepository.getById(id);
+    }
 }
