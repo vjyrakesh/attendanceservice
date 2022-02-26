@@ -1,16 +1,13 @@
 package com.rkasibhatla.attendanceservice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Teacher extends Person {
 
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private Set<Subject> subjects = new HashSet<>();
 
     @OneToOne(mappedBy = "classTeacher", fetch = FetchType.LAZY)

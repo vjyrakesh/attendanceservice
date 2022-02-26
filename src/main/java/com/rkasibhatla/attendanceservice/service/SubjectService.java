@@ -31,4 +31,8 @@ public class SubjectService {
         subject = subjectRepository.save(subject);
         return entityToDtoMapper.getSubjectDtoForSubject(subject);
     }
+
+    public Subject getSubjectByName(String name) {
+        return subjectRepository.findSubjectByName(name);
+    }
 }

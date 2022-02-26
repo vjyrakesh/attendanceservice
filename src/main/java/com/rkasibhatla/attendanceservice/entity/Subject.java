@@ -10,6 +10,7 @@ public class Subject {
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @ManyToOne(cascade = CascadeType.ALL)
