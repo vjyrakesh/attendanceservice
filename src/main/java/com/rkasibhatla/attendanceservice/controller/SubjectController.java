@@ -1,7 +1,9 @@
 package com.rkasibhatla.attendanceservice.controller;
 
+import com.rkasibhatla.attendanceservice.dto.StandardDto;
 import com.rkasibhatla.attendanceservice.dto.SubjectDto;
 import com.rkasibhatla.attendanceservice.entity.Subject;
+import com.rkasibhatla.attendanceservice.exception.DataNotFoundException;
 import com.rkasibhatla.attendanceservice.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +20,22 @@ public class SubjectController {
     private SubjectService subjectService;
 
     @GetMapping
-    public List<Subject> getAllSubjects() {
+    public List<SubjectDto> getAllSubjects() {
         return subjectService.getAllSubjects();
     }
 
     @PostMapping
     public ResponseEntity<?> addSubject(@RequestBody SubjectDto subject) {
         return new ResponseEntity<>(subjectService.addSubject(subject), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}/standard")
+    public ResponseEntity<?> addSubjectToStandard(@PathVariable Integer id, @RequestBody StandardDto standardDto) {
+        try {
+            subjectService.addSubjectToStandard(id, standardDto);
+            return ResponseEntity.ok().build();
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 }
