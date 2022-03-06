@@ -66,4 +66,17 @@ public class EntityToDtoMapper {
         }
         return subjectDto;
     }
+
+    public AttendanceRecordDto getAttendanceRecordDtoForAttendanceRecord(AttendanceRecord attendanceRecord) {
+        AttendanceRecordDto attendanceRecordDto = new AttendanceRecordDto();
+        if(attendanceRecord != null) {
+            attendanceRecordDto.setId(attendanceRecord.getId());
+            attendanceRecordDto.setStandardId(attendanceRecord.getStandardId());
+            attendanceRecordDto.setSubjectId(attendanceRecord.getSubjectId());
+            attendanceRecordDto.setStudentId(attendanceRecord.getStudentId());
+            attendanceRecordDto.setAttendanceDate(attendanceRecord.getAttendanceDate().toString());
+            attendanceRecordDto.setStatus(attendanceRecord.getStatus());
+        }
+        return attendanceRecordDto;
+    }
 }

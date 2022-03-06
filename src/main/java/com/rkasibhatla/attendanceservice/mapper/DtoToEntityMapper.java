@@ -4,6 +4,9 @@ import com.rkasibhatla.attendanceservice.dto.*;
 import com.rkasibhatla.attendanceservice.entity.*;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 @Component
 public class DtoToEntityMapper {
     public Person getPersonForPersonDto(PersonDto personDto) {
@@ -49,5 +52,16 @@ public class DtoToEntityMapper {
         subject.setId(subjectDto.getId());
         subject.setName(subjectDto.getName());
         return subject;
+    }
+
+    public AttendanceRecord getAttendanceRecordForAttendanceRecordDto(AttendanceRecordDto attendanceRecordDto) throws ParseException {
+        AttendanceRecord attendanceRecord = new AttendanceRecord();
+        attendanceRecord.setId(attendanceRecordDto.getId());
+        attendanceRecord.setStandardId(attendanceRecordDto.getStandardId());
+        attendanceRecord.setStudentId(attendanceRecordDto.getStudentId());
+        attendanceRecord.setSubjectId(attendanceRecordDto.getSubjectId());
+        attendanceRecord.setAttendanceDate(new SimpleDateFormat("yyyy-MM-dd").parse(attendanceRecordDto.getAttendanceDate()));
+        attendanceRecord.setStatus(attendanceRecordDto.getStatus());
+        return attendanceRecord;
     }
 }
