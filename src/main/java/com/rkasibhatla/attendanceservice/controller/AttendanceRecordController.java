@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/attendance")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AttendanceRecordController {
 
     @Autowired

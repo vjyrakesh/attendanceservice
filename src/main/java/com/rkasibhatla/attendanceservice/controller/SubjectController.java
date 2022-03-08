@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/subjects")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SubjectController {
 
     @Autowired
