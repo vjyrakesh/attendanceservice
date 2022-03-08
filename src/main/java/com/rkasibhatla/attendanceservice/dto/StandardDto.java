@@ -7,6 +7,15 @@ public class StandardDto {
     private Integer id;
     private String name;
     private TeacherDto classTeacher;
+    private int strength;
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
 
     public Integer getId() {
         return id;

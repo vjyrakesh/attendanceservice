@@ -52,6 +52,7 @@ public class EntityToDtoMapper {
             standardDto.setId(standard.getId());
             standardDto.setName(standard.getName());
             standardDto.setClassTeacher(getTeacherDtoForTeacher(standard.getClassTeacher()));
+            standardDto.setStrength(standard.getStudents().size());
         }
         return standardDto;
     }
