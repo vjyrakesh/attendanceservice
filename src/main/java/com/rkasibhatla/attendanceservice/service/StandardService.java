@@ -31,6 +31,7 @@ public class StandardService {
 
     public StandardDto addStandard(StandardDto standardDto) {
         Standard standard = dtoToEntityMapper.getStandardForStandardDto(standardDto);
+        standard = standardRepository.save(standard);
         return entityToDtoMapper.getStandardDtoForStandard(standard);
     }
 
@@ -56,5 +57,9 @@ public class StandardService {
 
     public Standard getStandardById(Integer id) {
         return standardRepository.getById(id);
+    }
+
+    public Standard getStandardByName(String name) {
+        return standardRepository.findStandardByName(name);
     }
 }

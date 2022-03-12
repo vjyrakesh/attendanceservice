@@ -30,7 +30,11 @@ public class StudentService {
         if(student == null) {
             throw new DataNotFoundException("Student with id: " + id + " not found");
         }
-        Standard standard = standardService.getStandardById(standardDto.getId());
+        Standard standard = null;
+        if(standardDto.getId() != null && standardDto.getId() > 0)
+            standard = standardService.getStandardById(standardDto.getId());
+        else if(standardDto.getName() != null && !standardDto.getName().equals(""))
+            standard = standardService.getStandardByName(standardDto.getName());
         if(standard == null) {
             throw new DataNotFoundException("Standard with id: " + standardDto.getId() + " not found");
         }
@@ -43,6 +47,14 @@ public class StudentService {
         List<Student> students = studentRepository.findAll();
         students.forEach(student -> studentDtos.add(entityToDtoMapper.getStudentDtoForStudent(student)));
         return studentDtos;
+    }
+
+    public StudentDto getOneStudent(Integer id) throws DataNotFoundException {
+        Student student = studentRepository.getById(id);
+        if(student == null) {
+            throw new DataNotFoundException("Student with id: " + id + " not found");
+        }
+        return entityToDtoMapper.getStudentDtoForStudent(student);
     }
 
 }

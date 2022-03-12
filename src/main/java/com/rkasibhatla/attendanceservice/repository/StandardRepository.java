@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StandardRepository extends JpaRepository<Standard, Integer> {
+    Standard findStandardByName(String name);
 }

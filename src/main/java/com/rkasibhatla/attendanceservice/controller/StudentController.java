@@ -33,4 +33,14 @@ public class StudentController {
     public List<StudentDto> getAllStudents() {
         return studentService.getAllStudents();
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getOneStudent(@PathVariable Integer id) {
+        try {
+            StudentDto studentDto = studentService.getOneStudent(id);
+            return new ResponseEntity(studentDto, HttpStatus.OK);
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }
