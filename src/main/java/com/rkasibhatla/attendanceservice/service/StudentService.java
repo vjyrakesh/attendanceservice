@@ -32,7 +32,7 @@ public class StudentService {
         }
         Standard standard = null;
         if(standardDto.getId() != null && standardDto.getId() > 0)
-            standard = standardService.getStandardById(standardDto.getId());
+            standard = standardService.getStandardEntityById(standardDto.getId());
         else if(standardDto.getName() != null && !standardDto.getName().equals(""))
             standard = standardService.getStandardByName(standardDto.getName());
         if(standard == null) {

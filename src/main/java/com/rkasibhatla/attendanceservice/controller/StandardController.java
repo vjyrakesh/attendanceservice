@@ -40,4 +40,14 @@ public class StandardController {
         return standardService.getAllStandards();
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getOneStandard(@PathVariable Integer id) {
+        try {
+            StandardDto standardDto = standardService.getStandardById(id);
+            return ResponseEntity.ok(standardDto);
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

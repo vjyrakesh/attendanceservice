@@ -55,7 +55,16 @@ public class StandardService {
         return standardDtos;
     }
 
-    public Standard getStandardById(Integer id) {
+    public StandardDto getStandardById(Integer id) throws DataNotFoundException {
+        Standard standard = standardRepository.getById(id);
+        if(standard != null) {
+            return entityToDtoMapper.getStandardDtoForStandard(standard);
+        } else {
+            throw new DataNotFoundException("Standard with id: " + id + " not found");
+        }
+    }
+
+    public Standard getStandardEntityById(Integer id) {
         return standardRepository.getById(id);
     }
 
