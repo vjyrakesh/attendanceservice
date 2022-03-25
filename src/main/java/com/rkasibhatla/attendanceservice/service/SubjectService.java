@@ -59,4 +59,12 @@ public class SubjectService {
         subject.setStandard(standard);
         subjectRepository.save(subject);
     }
+
+    public SubjectDto getOneSubject(Integer id) throws DataNotFoundException {
+        Subject subject = subjectRepository.getById(id);
+        if(subject == null) {
+            throw new DataNotFoundException("Subject with id: " + id + " not found");
+        }
+        return entityToDtoMapper.getSubjectDtoForSubject(subject);
+    }
 }

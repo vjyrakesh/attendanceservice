@@ -39,4 +39,14 @@ public class SubjectController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getOneSubject(@PathVariable Integer id) {
+        try {
+            SubjectDto subjectDto = subjectService.getOneSubject(id);
+            return ResponseEntity.ok(subjectDto);
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }
