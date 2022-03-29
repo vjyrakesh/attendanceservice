@@ -1,6 +1,7 @@
 package com.rkasibhatla.attendanceservice.controller;
 
 import com.rkasibhatla.attendanceservice.dto.StandardDto;
+import com.rkasibhatla.attendanceservice.dto.StudentDto;
 import com.rkasibhatla.attendanceservice.dto.TeacherDto;
 import com.rkasibhatla.attendanceservice.exception.DataNotFoundException;
 import com.rkasibhatla.attendanceservice.service.StandardService;
@@ -45,6 +46,16 @@ public class StandardController {
         try {
             StandardDto standardDto = standardService.getStandardById(id);
             return ResponseEntity.ok(standardDto);
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/{id}/students")
+    public ResponseEntity<?> getStudentsOfStandard(@PathVariable Integer id) {
+        try {
+            List<StudentDto> studentDtos = standardService.getStudentsOfStandard(id);
+            return ResponseEntity.ok(studentDtos);
         } catch (DataNotFoundException ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }

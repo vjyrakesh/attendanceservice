@@ -1,8 +1,10 @@
 package com.rkasibhatla.attendanceservice.service;
 
 import com.rkasibhatla.attendanceservice.dto.StandardDto;
+import com.rkasibhatla.attendanceservice.dto.StudentDto;
 import com.rkasibhatla.attendanceservice.dto.TeacherDto;
 import com.rkasibhatla.attendanceservice.entity.Standard;
+import com.rkasibhatla.attendanceservice.entity.Student;
 import com.rkasibhatla.attendanceservice.entity.Teacher;
 import com.rkasibhatla.attendanceservice.exception.DataNotFoundException;
 import com.rkasibhatla.attendanceservice.mapper.DtoToEntityMapper;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StandardService {
@@ -70,5 +73,16 @@ public class StandardService {
 
     public Standard getStandardByName(String name) {
         return standardRepository.findStandardByName(name);
+    }
+
+    public List<StudentDto> getStudentsOfStandard(Integer id) throws DataNotFoundException {
+        Standard standard = standardRepository.getById(id);
+        if(standard == null) {
+            throw new DataNotFoundException("Standard with id: " + id + " not found");
+        }
+        Set<Student> students = standard.getStudents();
+        List<StudentDto> studentDtos = new ArrayList<>();
+        students.forEach(student -> studentDtos.add(entityToDtoMapper.getStudentDtoForStudent(student)));
+        return studentDtos;
     }
 }
