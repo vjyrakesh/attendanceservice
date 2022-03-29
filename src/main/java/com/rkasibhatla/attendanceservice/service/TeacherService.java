@@ -76,4 +76,12 @@ public class TeacherService {
     public Teacher getTeacherById(Integer id) {
         return teacherRepository.findTeacherById(id);
     }
+
+    public TeacherDto getTeacherDto(Integer id) throws DataNotFoundException {
+        Teacher teacher = getTeacherById(id);
+        if(teacher == null) {
+            throw new DataNotFoundException("Teacher with id: " + id + " not found");
+        }
+        return entityToDtoMapper.getTeacherDtoForTeacher(teacher);
+    }
 }

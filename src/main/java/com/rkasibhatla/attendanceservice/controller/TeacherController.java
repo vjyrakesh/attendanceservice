@@ -43,4 +43,14 @@ public class TeacherController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getOneTeacher(@PathVariable Integer id) {
+        try {
+            TeacherDto teacherDto = teacherService.getTeacherDto(id);
+            return ResponseEntity.ok(teacherDto);
+        } catch (DataNotFoundException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }
